@@ -29,7 +29,22 @@ const UpdateUser = () => {
         axios.put(URL+"/user/update/"+id,{username,email,password})
         .then(result =>{console.log(result)
         navigate('/') })
-          .catch(error =>console.log(error))
+          .catch(error =>{
+            if(error.response && error.response.status ===400)
+            {
+            if(error.response.data.message === 'Invalid email format')
+            {
+                alert('Invalid email format. Please enter a valid email.')
+            } 
+            else  {
+                alert('Invalid password format. Please enter a password with at least 8 characters including at least one number, one special character, and one letter.')
+            }
+        }
+        else{
+            console.log(error)
+        }
+          })
+          
     }
 
   return (

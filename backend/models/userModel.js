@@ -14,8 +14,7 @@ const userSchema = mongoose.Schema({
         //         return /\S+@\S+\.\S+/.test(v); // Check if email contains @ symbol
         //     },
         //     message: props => `${props.value} is not a valid email address!`
-        // }
-      
+        // }     
     },
     password:{
         type:String,
@@ -24,3 +23,4 @@ const userSchema = mongoose.Schema({
 })
 
 module.exports= mongoose.model("CrudUser",userSchema)
+

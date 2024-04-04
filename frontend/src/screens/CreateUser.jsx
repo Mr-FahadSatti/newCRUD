@@ -4,12 +4,14 @@ import axios from 'axios'
 import{URL} from '../../src/url'
 import { useNavigate } from 'react-router-dom'
 
+
 const CreateUser = () => {
 
     const [username, setuserName]= useState()
     const [email,setEmail] = useState()
     const [password, setPassword]= useState()
     const [error,setError] = useState(false)
+    const [pasError, setPassError] = useState(false)
     const navigate= useNavigate()
 
 
@@ -26,9 +28,23 @@ const CreateUser = () => {
         }
         catch(err)
         {
+        if (err.response && err.response.status === 400) 
+        {
+            if (err.response.data.message === 'Invalid email format') 
+            {
+                alert('Invalid email format. Please enter a valid email.')
+            } 
+            else  {
+                alert('Invalid password format. Please enter a password with at least 8 characters including at least one number, one special character, and one letter.')
+            }
+        } 
+        else 
+        {
             setError(true)  
             console.log(err)
         }
+    }
+       
     }
   return (
     <div className='flex items-center justify-between px-6 md:px-[200px] py-4 bg-slate-300'>
